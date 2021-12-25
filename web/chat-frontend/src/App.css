@@ -1,0 +1,54 @@
+.card {
+  margin: 30px;
+  min-height: 20rem;
+}
+.title {
+  text-align: center;
+}
+form {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #F6F6F6;
+}
+
+
+button {
+  height: 3em;
+  background: #9147FF;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  border: none;
+}
+.message-field {
+  margin-right: 10px;
+}
+
+.render-chat {
+  overflow-y: scroll;
+  margin: 2px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #F6F6F6;
+  max-height: 10em;
+}
+
+span {
+  color: black;
+}
+
+@media only screen and (max-width: 800px) {
+  form {
+    flex-direction: column;
+  }
+  .message-field {
+    margin: 10px;
+  }
+  button {
+    width: fit-content;
+    margin-left: 10px;
+  }
+}
