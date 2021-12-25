@@ -45,8 +45,8 @@ function App() {
 
   const renderChat = () => {
     return chat.map(({name, message, color}, index) => (
-
-        <h3 style={{color: color}} key={index}>{name}: <span>{message}</span></h3>
+		
+        <h3 className="chat-message" style={message.includes("@" + state.name) ? {backgroundColor: "#9147FF", color: "white"} : {color: color}} key={index}>{name}: <span style={message.includes("@" + state.name) ? {color: "white"} : {color: "black"}}>{message}</span></h3>
 
     ))
   }
