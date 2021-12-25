@@ -32,35 +32,39 @@ function App() {
 
   const renderChat = () => {
     return chat.map(({name, message}, index) => (
-      <div key={index}>
-        <h3>{name}: <span>{message}</span></h3>
-      </div>
+
+        <h3 key={index}>{name}: <span>{message}</span></h3>
+
     ))
   }
 
 
   return (
-		<div className="card">
+		<div className="card">		
+			<div className="chat">
+			<h1 className="title">Chat Log</h1>
+			<div className="render-chat" >
+				
+				{renderChat()}
+			</div>
 			<form onSubmit={onMessageSubmit}>
-				<h1>Messenger</h1>
-				<div className="name-field">
-					<TextField name="name" onChange={(e) => onTextChange(e)} value={state.name} label="Name" />
+				<div className="message-field">
+					<TextField variant="outlined" size="small" name="name" onChange={(e) => onTextChange(e)} value={state.name} label="Name" />
 				</div>
-				<div>
+				<div className="message-field">
 					<TextField
+						style = {{width: 500}}
 						name="message"
 						onChange={(e) => onTextChange(e)}
 						value={state.message}
 						id="outlined-multiline-static"
 						variant="outlined"
 						label="Message"
+						size="small"
 					/>
 				</div>
 				<button>Send Message</button>
-			</form>
-			<div className="render-chat">
-				<h1>Chat Log</h1>
-				{renderChat()}
+			</form>	
 			</div>
 		</div>
 	)

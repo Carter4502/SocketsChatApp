@@ -1,32 +1,42 @@
 .card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   margin: 30px;
-  min-height: 30rem;
+  min-height: 20rem;
+}
+.title {
+  text-align: center;
 }
 form {
-  max-width: 350px;
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
+  background-color: #F6F6F6;
 }
 
-.name-field {
-  margin-bottom: 40px;
-}
 
 button {
-  margin-top: 20px;
   padding: 10px;
-  background: transparent;
+  height: 3em;
+  background: #9147FF;
   border-radius: 5px;
+  color: white;
+  outline: none;
+  border: none;
 }
-
+.message-field {
+  margin-right: 5px;
+}
+.message {
+ 
+}
 .render-chat {
-  max-width: 350px;
+  overflow-y: scroll;
+  margin: 5px;
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0px 3px 24px -8px rgba(0, 0, 0, 0.75);
+  background-color: #F6F6F6;
+  max-height: 10em;
 }
 
 h3 {
@@ -35,4 +45,8 @@ h3 {
 
 span {
   color: black;
+}
+
+@media only screen and (min-width: 800px) {
+
 }
