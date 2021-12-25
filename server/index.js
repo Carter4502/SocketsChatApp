@@ -4,8 +4,8 @@ const io = require('socket.io')(http, { cors: {origin:'*'}})
 
 
 io.on("connection", socket => {
-    socket.on("message", ({name, message}) => {
-        io.emit("message", {name, message})
+    socket.on("message", ({name, message, color}) => {
+        io.emit("message", {name, message, color})
     })
 })
 

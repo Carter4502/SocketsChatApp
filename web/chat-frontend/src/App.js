@@ -2,10 +2,10 @@ import React, {useState, useEffect, useRef} from 'react';
 import io from 'socket.io-client';
 import TextField from '@material-ui/core/TextField';
 import './App.css';
-
+import randomColor from 'randomcolor';
 
 function App() {
-  const [state, setState] = useState({message: '', name: ''})
+  const [state, setState] = useState({message: '', name: '', color: ''})
   const [chat, setChat] = useState([])
   const socketRef = useRef()
   const messagesEndRef = useRef(null)
@@ -13,8 +13,8 @@ function App() {
   useEffect(
 		() => {
 			socketRef.current = io.connect("http://localhost:4000")
-			socketRef.current.on("message", ({ name, message }) => {
-				setChat([ ...chat, { name, message } ])
+			socketRef.current.on("message", ({ name, message, color }) => {
+				setChat([ ...chat, { name, message, color } ])
 			})
 			scrollToBottom()
 			return () => socketRef.current.disconnect()
@@ -26,21 +26,27 @@ function App() {
 	messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const onTextChange = (e) => {
-    setState({...state, [e.target.name]: e.target.value})
+  const onTextChange = async(e) => {
+	setState({...state, [e.target.name]: e.target.value});
   }
 
+ 
   const onMessageSubmit = (e) => {
+	var currentColor = state.color;
     const {name, message} = state
-    socketRef.current.emit('message', {name, message})
+	if (currentColor === '') {
+		currentColor = randomColor({luminosity: 'dark'});
+		
+	}
+    socketRef.current.emit('message', {name: name, message: message, color: currentColor})
     e.preventDefault()
-    setState({message: "", name: name})
+    setState({message: "", name: name, color: currentColor})
   }
 
   const renderChat = () => {
-    return chat.map(({name, message}, index) => (
+    return chat.map(({name, message, color}, index) => (
 
-        <h3 key={index}>{name}: <span>{message}</span></h3>
+        <h3 style={{color: color}} key={index}>{name}: <span>{message}</span></h3>
 
     ))
   }
