@@ -8,17 +8,24 @@ function App() {
   const [state, setState] = useState({message: '', name: ''})
   const [chat, setChat] = useState([])
   const socketRef = useRef()
+  const messagesEndRef = useRef(null)
+
   useEffect(
 		() => {
 			socketRef.current = io.connect("http://localhost:4000")
 			socketRef.current.on("message", ({ name, message }) => {
 				setChat([ ...chat, { name, message } ])
 			})
+			scrollToBottom()
 			return () => socketRef.current.disconnect()
 		},
 		[ chat ]
 	)
   
+  const scrollToBottom = () => {
+	messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
   const onTextChange = (e) => {
     setState({...state, [e.target.name]: e.target.value})
   }
@@ -43,9 +50,10 @@ function App() {
 		<div className="card">		
 			<div className="chat">
 			<h1 className="title">Chat Log</h1>
-			<div className="render-chat" >
+			<div className="render-chat">
 				
 				{renderChat()}
+				<div ref={messagesEndRef} />
 			</div>
 			<form onSubmit={onMessageSubmit}>
 				<div className="message-field">
@@ -53,7 +61,6 @@ function App() {
 				</div>
 				<div className="message-field">
 					<TextField
-						style = {{width: 500}}
 						name="message"
 						onChange={(e) => onTextChange(e)}
 						value={state.message}
